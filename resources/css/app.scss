@@ -1,0 +1,23 @@
+@import "global/main";
+@import "global/header";
+@import "global/footer";
+@import "global/sign_in";
+@import "global/profile";
+@import "global/main-page";
+@import "global/film-list";
+@import "global/alert-message";
+@import "global/notification";
+@import "global/chat";
+@import "node_modules/font-awesome/scss/font-awesome";
+@import "global/sidebar";
+@import "global/questionnaire";
+@import "global/slider";
+@import "global/search";
+
+.d-flex {
+    display: flex;
+}
+
+.align-items-center{
+    align-items: center;
+}

@@ -1,0 +1,9 @@
+require('./bootstrap');
+require('./global/alert-message')
+require('./global/notification')
+require('./global/menu')
+require('./global/sign_in')
+require('./global/short-text.js')
+require('./global/chat.js')
+require('./global/questionnaire')
+require('./global/search')
