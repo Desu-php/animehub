@@ -1,32 +1,37 @@
-@include('templates.slider')
-<!-- Content -->
-<div id="content">
+@extends('partials.layout')
+@section('content')
 
-    <!-- поиск -->
-    @include('templates.search')
+    @include('templates.slider', compact('sliders'))
 
-    <?php
-    $url = '/anime';
-    $title = 'Новые серии аниме';
-    $url_title = 'Смотреть все новинки';
-    include 'blocks/cards.block.php'
-    ?>
+    <!-- Content -->
+    <div id="content">
 
-    <?php
-    $url = '/anime';
-    $title = 'Все аниме';
-    $url_title = 'Смотреть все';
-    $posts = $newPosts;
-    include 'blocks/cards.block.php'
-    ?>
+        <!-- поиск -->
+        @include('templates.search')
 
-    <?php
-    $url = '/dorams';
-    $title = 'Все дорамы';
-    $url_title = 'Смотреть все';
-    $posts = $dorams;
-    include 'blocks/cards.block.php'
-    ?>
-</div>
+        @include('templates.main.posts', [
+            'title' => 'Новые серии аниме',
+            'url_title' => 'Смотреть все новинки',
+            'url' => url('/'),
+            'posts' => $posts
+        ])
 
-<script src="<?=$uri?>/templates/js/slider.js?<?=filemtime('templates/js/slider.js')?>"></script>
+        @include('templates.main.posts', [
+            'title' => 'Все аниме',
+            'url_title' => 'Смотреть все',
+            'url' => url('/'),
+            'posts' => $newPosts
+        ])
+
+        @include('templates.main.posts', [
+           'title' => 'Все дорамы',
+           'url_title' => 'Смотреть все',
+           'url' => url('/'),
+           'posts' => $dorams
+       ])
+
+    </div>
+
+@endsection
+
+

@@ -39,8 +39,7 @@ class Post extends Model {
     {
         return $query->whereHas('type', function (Builder $builder)use ($type){
             $builder->where('title_type_post', $type);
-        })->with('categories')
-            ->with('view')
+        })->with(['categories', 'view', 'tv'])
             ->with(['anime' => function($query){
                 $query->orderBy('seria', 'DESC');
             }]);

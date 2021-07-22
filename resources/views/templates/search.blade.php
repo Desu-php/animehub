@@ -1,4 +1,3 @@
-<input type="text" value="<?=$type?>" id="type" hidden>
 <form class="search-block" action="/search" method="get">
     <input type="text" name="do" class="search">
     <div class="placeholder">Поиск аниме</div>

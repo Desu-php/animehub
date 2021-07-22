@@ -3,10 +3,21 @@
 use App\Models\Year;
 use App\Models\Cat;
 use App\Models\Page;
+use Illuminate\Support\Facades\Cache;
 
-$years = Year::orderBy('title')->get();
-$categories = Cat::all();
-$pages = Page::orderBy('order_menu')->get();
+$years = Cache::rememberForever('years', function () {
+    return Year::orderBy('title')->get();
+});
+
+$categories = Cache::rememberForever('categories', function () {
+    return Cat::all();;
+});
+
+$pages = Cache::rememberForever('menus', function () {
+    return Page::orderBy('order_menu')->get();
+});
+
+
 ?>
 
 @if(Auth::check())

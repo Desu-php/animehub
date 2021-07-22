@@ -12,9 +12,11 @@
     <div class="background-slider"></div>
 
     <div class="slide-wrapper">
-        <?php foreach ($slider as $slide):?>
-        <a href="/anime/<?=$helper::renderUrl($slide['id'], $slide['alias'])?>" >  <div class="slide"><img src="<?=$slide['img']?>"> </div></a>
-        <?php endforeach; ?>
+        @foreach($sliders as $slider)
+            <a href="">
+                <div class="slide"><img src="{{$slider->img}}" alt="{{$slider->title}}"></div>
+            </a>
+        @endforeach
     </div>
 </div>
 

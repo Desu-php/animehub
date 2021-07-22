@@ -1854,6 +1854,8 @@ __webpack_require__(/*! ./global/short-text.js */ "./resources/js/global/short-t
 
 __webpack_require__(/*! ./global/chat.js */ "./resources/js/global/chat.js");
 
+__webpack_require__(/*! ./global/slider */ "./resources/js/global/slider.js");
+
 __webpack_require__(/*! ./global/questionnaire */ "./resources/js/global/questionnaire.js");
 
 __webpack_require__(/*! ./global/search */ "./resources/js/global/search.js");
@@ -2843,6 +2845,88 @@ var videos = document.querySelectorAll(".comment-text video");
 videos.forEach(function (element) {
   element.remove();
 });
+
+/***/ }),
+
+/***/ "./resources/js/global/slider.js":
+/*!***************************************!*\
+  !*** ./resources/js/global/slider.js ***!
+  \***************************************/
+/***/ (() => {
+
+var sliderWidth, startContactSlider, endContactSlider;
+var slider = document.querySelector('#slider');
+var slides = document.querySelectorAll(".slide");
+var backgroundSlider = document.querySelector('.background-slider');
+var swrap = document.querySelector(".slide-wrapper");
+var narr = document.querySelector(".s-next");
+var parr = document.querySelector(".s-prev");
+var isSwitching = true;
+var prevpos = 0;
+var pos = 0;
+res();
+
+window.onresize = function () {
+  res();
+  resizeingShortingText();
+};
+
+function res() {
+  sliderWidth = document.querySelector('#wrapper').clientWidth;
+}
+
+;
+setInterval(nextSlide, 4000);
+slider.addEventListener('touchstart', function (event) {
+  return startContactSlider = event.targetTouches[0].pageX;
+});
+slider.addEventListener('touchmove', function (event) {
+  return endContactSlider = event.targetTouches[0].pageX;
+});
+slider.addEventListener('touchstart', function () {
+  setTimeout(function () {
+    if (startContactSlider > endContactSlider + 50) nextSlide();
+    if (startContactSlider + 50 < endContactSlider) prevSlide();
+  }, 300);
+});
+narr.addEventListener('click', nextSlide);
+parr.addEventListener('click', prevSlide);
+
+function nextSlide() {
+  if (isSwitching) {
+    isSwitching = false;
+    prevpos = pos;
+    pos < slides.length - 1 ? pos++ : pos = 0;
+    showSlide();
+  }
+
+  ;
+}
+
+;
+
+function prevSlide() {
+  if (isSwitching) {
+    isSwitching = false;
+    prevpos = pos;
+    pos > 0 ? pos-- : pos = slides.length - 1;
+    showSlide();
+  }
+
+  ;
+}
+
+;
+
+function showSlide() {
+  backgroundSlider.style.transform = "translateX(-" + pos * sliderWidth / 3 + "px)";
+  swrap.style.transform = "translateX(-" + pos * sliderWidth + "px)";
+  setTimeout(function () {
+    isSwitching = true;
+  }, 2000);
+}
+
+;
 
 /***/ }),
 

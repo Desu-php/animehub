@@ -1,18 +1,23 @@
 <?php
 use App\Models\Top;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Cache;
 
-$topPosts = Top::orderBy('rating')
-    ->with('post.tv')
-    ->take(5)
-    ->get();
+$topPosts = Cache::rememberForever('top', function () {
+    return Top::orderBy('rating', 'DESC')
+        ->with('post.tv')
+        ->take(5)
+        ->get();
+});
 
-$comments = Comment::with(['user.vip', 'post.tv', 'user.role'])
-    ->orderBy('id', 'DESC')
-    ->take(5)
-    ->get();
-
+$comments = Cache::rememberForever('comments', function () {
+    return Comment::with(['user.vip', 'post.tv', 'user.role'])
+        ->orderBy('id', 'DESC')
+        ->take(5)
+        ->get();
+});
 ?>
+
 <div id="sidebar">
     <div class="update-block">
         <div class="top-weak">
@@ -83,20 +88,20 @@ $comments = Comment::with(['user.vip', 'post.tv', 'user.role'])
                             style="color: {{$comment->user->role->color}} @if($vipUser) font-family:{{$comment->user->vip->font}}@endif">
                         {{$comment->user->role->title}}
                     </span>
-                        </div>
+                    </div>
+            </div>
+            </a>
+            <div class="comment-text">{{$comment->body}}</div>
+            @if($comment->post)
+                <a href="/">
+                    <div class="comments-name-film">
+                        {{$comment->post->title.' '.$comment->post->tv->title}}
                     </div>
                 </a>
-                <div class="comment-text">{{$comment->body}}</div>
-                @if($comment->post)
-                    <a href="/">
-                        <div class="comments-name-film">
-                            {{$comment->post->title.' '.$comment->post->tv->title}}
-                        </div>
-                    </a>
-                @endif
-            </div>
-        @endforeach
+            @endif
     </div>
+    @endforeach
+</div>
 </div>
 </div>
 
