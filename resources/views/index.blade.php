@@ -12,21 +12,21 @@
         @include('templates.main.posts', [
             'title' => 'Новые серии аниме',
             'url_title' => 'Смотреть все новинки',
-            'url' => url('/'),
+            'url' => route('posts', 'anime'),
             'posts' => $posts
         ])
 
         @include('templates.main.posts', [
             'title' => 'Все аниме',
             'url_title' => 'Смотреть все',
-            'url' => url('/'),
+            'url' => route('posts', 'anime'),
             'posts' => $newPosts
         ])
 
         @include('templates.main.posts', [
            'title' => 'Все дорамы',
            'url_title' => 'Смотреть все',
-           'url' => url('/'),
+           'url' => route('posts', 'dorams'),
            'posts' => $dorams
        ])
 

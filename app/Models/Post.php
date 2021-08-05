@@ -10,6 +10,13 @@ class Post extends Model {
     protected $table = 'lite_post';
     public $timestamps = false;
 
+    protected $perPage = 28;
+
+    public function tops()
+    {
+        return $this->hasMany(Top::class, 'id_post');
+    }
+
     public function tv()
     {
         return $this->belongsTo(Tv::class, 'id_tv');
@@ -32,18 +39,33 @@ class Post extends Model {
 
     public function type()
     {
-        return $this->belongsTo(TypePost::class, 'id_type_post');
+        return $this->belongsTo(TypePost::class, 'id_type_post', 'id');
     }
 
     public function scopePost($query,$type)
     {
         return $query->whereHas('type', function (Builder $builder)use ($type){
-            $builder->where('title_type_post', $type);
+            $builder->where('alias', $type);
         })->with(['categories', 'view', 'tv'])
             ->with(['anime' => function($query){
                 $query->orderBy('seria', 'DESC');
             }]);
     }
+
+   public function scopeYear($query, $year)
+    {
+        return $query->whereHas('year', function($query) use($year){
+            $query->where('title',$year );
+        });
+    }
+
+    public function scopeCategory($query,$category)
+    {
+        return $query->whereHas('categories', function (Builder  $builder) use ($category){
+            $builder->where('slug', $category);
+        });
+    }
+
 
     public function anime()
     {

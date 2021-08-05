@@ -23,15 +23,16 @@ class IndexController extends Controller
                 ->get();
         });
 
+
         $newPosts = Cache::rememberForever('newPosts', function () {
-            return $newPosts = Post::post('anime')
+            return Post::post('anime')
                 ->orderBy('id', 'DESC')
                 ->take(5)
                 ->get();
         });
 
         $dorams = Cache::rememberForever('dorams', function () {
-            return $newPosts = Post::post('dorams')
+            return Post::post('dorams')
                 ->orderBy('id', 'DESC')
                 ->take(5)
                 ->get();
@@ -39,4 +40,5 @@ class IndexController extends Controller
 
         return view('index', compact('sliders', 'posts', 'newPosts', 'dorams'));
     }
+
 }

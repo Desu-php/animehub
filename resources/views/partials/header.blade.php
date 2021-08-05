@@ -2,7 +2,6 @@
 
 use App\Models\Year;
 use App\Models\Cat;
-use App\Models\Page;
 use Illuminate\Support\Facades\Cache;
 
 $years = Cache::rememberForever('years', function () {
@@ -12,12 +11,6 @@ $years = Cache::rememberForever('years', function () {
 $categories = Cache::rememberForever('categories', function () {
     return Cat::all();;
 });
-
-$pages = Cache::rememberForever('menus', function () {
-    return Page::orderBy('order_menu')->get();
-});
-
-
 ?>
 
 @if(Auth::check())
@@ -79,7 +72,7 @@ $pages = Cache::rememberForever('menus', function () {
                     <span class="sub-menu-header">По годам</span>
                     <ul class="qualification-list">
                         @foreach($years as $year)
-                            <li><a href="{{url('/')}}year/{{$year->title}}">{{$year->title}}</a></li>
+                            <li><a href="{{route('posts', 'anime?year='.$year->title)}}">{{$year->title}}</a></li>
                         @endforeach
                     </ul>
                 </div>
@@ -87,7 +80,7 @@ $pages = Cache::rememberForever('menus', function () {
                 <div class="right-part-sub-menu-block">
                     @foreach($categories as $category)
                         <div class="category-item d-flex align-items-center">
-                            <a href="{{url('/')}}">{{$category->title}}</a>
+                           <a href="{{route('category', ['anime', $category->slug])}}">{{$category->title}}</a>
                         </div>
 
                     @endforeach
@@ -95,10 +88,13 @@ $pages = Cache::rememberForever('menus', function () {
             </div>
         </li>
 
-        @foreach($pages as $page)
-            <li class="top-menu"><a
-                    href="{{$page->alias}}"><span>{{$page->title}}</span></a></li>
-        @endforeach
+        <li class="top-menu"><a
+                href="{{route('posts', 'anime')}}"><span>Аниме</span></a></li>
+        <li class="top-menu"><a
+                href="{{route('posts', 'dorams')}}"><span>Дорама</span></a></li>
+        <li class="top-menu"><a
+                href="{{route('category',['anime', 'ongoing'])}}"><span>Онгоинг</span></a></li>
+
     </ul>
 
 

@@ -10,5 +10,4 @@ class TypePost extends Model
 {
     public $timestamps = false;
     protected $table = 'lite_type_post';
-    protected $primaryKey = 'id_type_post';
 }

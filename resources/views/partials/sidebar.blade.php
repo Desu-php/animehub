@@ -8,7 +8,9 @@ $topPosts = Cache::rememberForever('top', function () {
         ->with('post.tv')
         ->take(5)
         ->get();
+
 });
+
 
 $comments = Cache::rememberForever('comments', function () {
     return Comment::with(['user.vip', 'post.tv', 'user.role'])
