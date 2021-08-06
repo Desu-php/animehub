@@ -6,36 +6,6 @@ let showChat = document.querySelector('.show-chat');
 let crossChat = document.querySelector('.cross-chat');
 let controls = document.querySelector('.control-chat');
 
-if (controls !== null) {
-  var config2 = {
-    height: '69',
-    width: '300',
-    toolbarStartupExpanded: false,
-    contentsCss: 'body{background:#f8f8f8;}',
-    enterMode: CKEDITOR.ENTER_BR,
-    toolbar: [],
-    enterMode: () => alert("dsds")
-  };
-
-  editor = CKEDITOR.replace('redactor', config2);
-
-  editor.on('key', function (e) {
-    if (e.data.keyCode == 13) {
-
-
-      var mymessage = CKEDITOR.instances['redactor'].getData();
-
-
-      if (mymessage == "") {
-        showMessage("error", "Введите ваше сообщение!", error);
-        return;
-      }
-      sendMessage(mymessage);
-      CKEDITOR.instances['redactor'].setData("");
-    }
-  });
-
-}
 var page = 1;
 innerChat.onscroll = () => {
   let scrollBottom = innerChat.scrollHeight - innerChat.scrollTop - innerChat.clientHeight;
@@ -68,37 +38,6 @@ function scrollingToBottom() {
 $(document).ready(function () {
   localStorage.removeItem('click');
 
-  $.ajax({
-    type: "post",
-    url: "/ajax/check/auth",
-    success: function (response) {
-      response = JSON.parse(response);
-      if (response.status == 401) {
-        localStorage.removeItem("user")
-      }
-    }
-  });
-
-  // Тут с базы в локал сторейг берет данные о юзере
-  if (localStorage.getItem('user') === null) {
-    $.ajax({
-      url: '/ws/login',
-      method: 'GET',
-      success: function (data) {
-        var user = JSON.parse(data);
-        if (user.status == 200) {
-          // Если чел авторизован и все успешно, его инфа в локал сохраняем
-          localStorage.setItem('user', JSON.stringify(user.info));
-
-        } else {
-          // если юзер не авторизован тут выводи какиую нибудь ошибку, чтоб авторизовался для того что бы пользоваться чатом
-
-          localStorage.removeItem('user');
-        }
-
-      }
-    });
-  }
 });
 
 

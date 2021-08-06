@@ -1971,8 +1971,6 @@ function createMessage(name, discription, typeMessage) {
   \*************************************/
 /***/ (() => {
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 var innerChat = document.querySelector('#chat');
 var scrollToBottom = document.querySelector('.scroll-bottom');
 var chat = document.querySelector('.chat-block');
@@ -1980,35 +1978,6 @@ var chatHeader = document.querySelector('.chat-header');
 var showChat = document.querySelector('.show-chat');
 var crossChat = document.querySelector('.cross-chat');
 var controls = document.querySelector('.control-chat');
-
-if (controls !== null) {
-  var config2 = _defineProperty({
-    height: '69',
-    width: '300',
-    toolbarStartupExpanded: false,
-    contentsCss: 'body{background:#f8f8f8;}',
-    enterMode: CKEDITOR.ENTER_BR,
-    toolbar: []
-  }, "enterMode", function enterMode() {
-    return alert("dsds");
-  });
-
-  editor = CKEDITOR.replace('redactor', config2);
-  editor.on('key', function (e) {
-    if (e.data.keyCode == 13) {
-      var mymessage = CKEDITOR.instances['redactor'].getData();
-
-      if (mymessage == "") {
-        showMessage("error", "Введите ваше сообщение!", error);
-        return;
-      }
-
-      sendMessage(mymessage);
-      CKEDITOR.instances['redactor'].setData("");
-    }
-  });
-}
-
 var page = 1;
 
 innerChat.onscroll = function () {
@@ -2048,35 +2017,6 @@ function scrollingToBottom() {
 ;
 $(document).ready(function () {
   localStorage.removeItem('click');
-  $.ajax({
-    type: "post",
-    url: "/ajax/check/auth",
-    success: function success(response) {
-      response = JSON.parse(response);
-
-      if (response.status == 401) {
-        localStorage.removeItem("user");
-      }
-    }
-  }); // Тут с базы в локал сторейг берет данные о юзере
-
-  if (localStorage.getItem('user') === null) {
-    $.ajax({
-      url: '/ws/login',
-      method: 'GET',
-      success: function success(data) {
-        var user = JSON.parse(data);
-
-        if (user.status == 200) {
-          // Если чел авторизован и все успешно, его инфа в локал сохраняем
-          localStorage.setItem('user', JSON.stringify(user.info));
-        } else {
-          // если юзер не авторизован тут выводи какиую нибудь ошибку, чтоб авторизовался для того что бы пользоваться чатом
-          localStorage.removeItem('user');
-        }
-      }
-    });
-  }
 });
 
 showChat.onclick = function () {

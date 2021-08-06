@@ -30,13 +30,14 @@ $categories = Cache::rememberForever('categories', function () {
                 </div>
 
                 <div class="profile-name"
-                     style="font-family: {{Auth::user()->user->font}}; {{Auth::user()->user->login_color}}">
-                    {{Auth::user()->user->login}}
+{{--                     style="font-family: {{Auth::user()->user->vip->font}}; {{Auth::user()->user->login_color}}"--}}
+                >
+                    {{Auth::user()->login}}
                 </div>
             </div>
 
             <div class="profile-bottom">
-                <div><a href="/profile/{{Auth::user()->user->login}}">Профиль</a></div>
+                <div><a href="/profile/{{Auth::user()->login}}">Профиль</a></div>
                 {{--            <?php if ($_SESSION['status'] != 'Анимешник' && $_SESSION['status'] != '_VIP_'): ?>--}}
                 {{--            <div><a href="/admin/">Админ панель</a></div>--}}
                 {{--            <?php if ($_SESSION['status'] == 'Админ' || $_SESSION['status'] == 'Модератор'): ?>--}}
@@ -45,7 +46,10 @@ $categories = Cache::rememberForever('categories', function () {
                 {{--            <?php endif; ?>--}}
                 <div><a href="/favorites">Закладки: (<span
                             class="bookmark-quantity">{{Auth::user()->user->favorites()->count()}}</span>)</a></div>
-                <div><a href="/logout?>">Выйти</a></div>
+                <div><a href="#" onclick="(event) => event.preventDefault(); document.getElementById('logoutForm').submit()">Выйти</a></div>
+                <form hidden id="logoutForm" method="post" action="{{route('logout')}}">
+                        @csrf
+                </form>
             </div>
         </div>
     </div>

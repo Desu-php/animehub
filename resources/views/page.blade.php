@@ -55,12 +55,7 @@
         </div>
 
     </div>
-
-
-
-
-
-
+    {{$posts->onEachSide(1)->links()}}
 </div>
 
 @endsection

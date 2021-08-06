@@ -117,7 +117,8 @@
         </div>
 
         <div class="main-sign-in-page">
-            <form class="" action="{{url('/')}}back_animehub/login" method="post">
+            <form class="" action="{{route('login')}}" method="post">
+                @csrf
                 <div class="sign-in-input">
                     <input type="text" name="login" class="main-input sign-in-input-item">
                     <div class="sign-in-placeholder">Ваш логин</div>
@@ -129,7 +130,7 @@
 
                 <input type="submit" value="Войти на сайт" name="enter" class="main-input">
                 <div class="check-block">
-                    <label for="check"><input type="checkbox" id="check"> Запомнить меня</label>
+                    <label for="check"><input type="checkbox" name="remember" id="check"> Запомнить меня</label>
                 </div>
             </form>
             <div class="bottom">

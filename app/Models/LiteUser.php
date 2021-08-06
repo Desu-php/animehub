@@ -24,7 +24,7 @@ class LiteUser extends Model
 
     public function favorites()
     {
-        return $this->belongsToMany(Post::class, 'lite_favorites', 'id_post', 'id_user');
+        return $this->belongsToMany(Post::class, 'lite_favorites',  'id_user', 'id_post');
     }
 
     public function vip()

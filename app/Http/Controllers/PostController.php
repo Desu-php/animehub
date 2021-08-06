@@ -25,7 +25,7 @@ class PostController extends Controller
 
         abort_if($posts->isEmpty(), 404);
 
-        return view('page', compact('posts'))->with('title', 'Аниме');
+        return view('page', compact('posts'));
     }
 
     public function category($type, $category)
@@ -35,7 +35,7 @@ class PostController extends Controller
             ->orderBy('date', 'desc')
             ->paginate();
 
-        return view('page', compact('posts'))->with('title', 'Аниме');
+        return view('page', compact('posts'));
     }
 
 
