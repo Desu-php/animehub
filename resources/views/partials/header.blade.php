@@ -2,6 +2,7 @@
 
 use App\Models\Year;
 use App\Models\Cat;
+use App\Models\Type;
 use Illuminate\Support\Facades\Cache;
 
 $years = Cache::rememberForever('years', function () {
@@ -9,8 +10,12 @@ $years = Cache::rememberForever('years', function () {
 });
 
 $categories = Cache::rememberForever('categories', function () {
-    return Cat::all();;
+    return Cat::all();
 });
+
+$types = Cache::rememberForever('types', function (){
+    return Type::all();
+})
 ?>
 
 @if(Auth::check())
@@ -61,16 +66,15 @@ $categories = Cache::rememberForever('categories', function () {
                                          src="{{asset('images/logo.png')}}"></div>
     </a>
     <ul id="menu">
-        <li class="active sub-menu top-menu">
+        <li class="@if(request()->is('anime')) active @endif sub-menu top-menu">
             <a href="/anime"><span>Аниме</span></a>
             <div id="sub-menu">
                 <div class="left-part-sub-menu">
                     <span class="sub-menu-header">По типу</span>
                     <ul class="qualification-list">
-                        <li><a href="{{url('/')}}/type/tv">ТВ</a></li>
-                        <li><a href="{{url('/')}}/type/ova">OVA</a></li>
-                        <li><a href="{{url('/')}}/type/film">Фильм</a></li>
-                        <li><a href="{{url('/')}}/type/amv">AMV</a></li>
+                        @foreach($types as $type)
+                        <li><a href="{{route('posts','anime?type='.$type->slug)}}">{{$type->name}}</a></li>
+                        @endforeach
                     </ul>
 
                     <span class="sub-menu-header">По годам</span>
@@ -91,12 +95,9 @@ $categories = Cache::rememberForever('categories', function () {
                 </div>
             </div>
         </li>
-
-        <li class="top-menu"><a
-                href="{{route('posts', 'anime')}}"><span>Аниме</span></a></li>
-        <li class="top-menu"><a
+        <li class="@if(request()->is('dorams')) active @endif top-menu"><a
                 href="{{route('posts', 'dorams')}}"><span>Дорама</span></a></li>
-        <li class="top-menu"><a
+        <li class="@if(request()->is('anime/category/ongoing')) active @endif top-menu"><a
                 href="{{route('category',['anime', 'ongoing'])}}"><span>Онгоинг</span></a></li>
 
     </ul>

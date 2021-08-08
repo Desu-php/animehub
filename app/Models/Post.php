@@ -66,7 +66,6 @@ class Post extends Model {
         });
     }
 
-
     public function anime()
     {
         return $this->hasOne(Anime::class, 'post_id');
@@ -75,6 +74,18 @@ class Post extends Model {
     public function users()
     {
         return $this->belongsToMany(User::class, 'lite_favorites', 'id_post', 'id_user');
+    }
+
+    public function typeAnime()
+    {
+        return $this->belongsTo(Type::class, 'id_type');
+    }
+
+    public function scopeTypeAnime($query, $slug)
+    {
+        return $query->whereHas('typeAnime', function (Builder $builder) use ($slug){
+            $builder->where('slug', $slug);
+        });
     }
 }
 

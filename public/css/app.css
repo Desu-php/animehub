@@ -211,14 +211,6 @@ body.opacity-sub-menu #sub-menu {
   cursor: pointer;
 }
 
-.active {
-  background-color: #D81C27;
-  color: white !important;
-}
-.active:hover {
-  color: white !important;
-}
-
 .menu-lines {
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
@@ -400,6 +392,20 @@ ul.gener-list li:hover {
     display: flex;
   }
 }
+@media screen and (min-width: 992px) {
+  #menu > .active {
+    background: #D81C27;
+    cursor: pointer;
+  }
+
+  #menu > .active a span {
+    color: #fff !important;
+  }
+}
+.ribbon {
+  left: 17px;
+}
+
 #footer {
   padding: 30px 50px;
 }
