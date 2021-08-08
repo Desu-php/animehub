@@ -27,4 +27,7 @@ Route::get('/{type}/category/{category}', [PostController::class, 'category'])->
 Route::group(['prefix' => 'auth'], function (){
     Route::post('login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
     Route::post('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+
+    Route::get('registration', [\App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('register');
+    Route::post('registration', [\App\Http\Controllers\Auth\RegisterController::class, 'store'])->name('register.store');
 });

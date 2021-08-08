@@ -26,7 +26,7 @@ $categories = Cache::rememberForever('categories', function () {
         <div class="main-sign-in-page">
             <div class="profile-data">
                 <div class="profile-avatar">
-                    {{--                <img src="<?=viewAvatar($user['img'])?>" alt="avatar">--}}
+                    <img src="{{asset(Auth::user()->user->img)}}" alt="avatar">
                 </div>
 
                 <div class="profile-name"

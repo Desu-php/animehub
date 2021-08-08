@@ -14,7 +14,8 @@ class LiteUser extends Model
 
     protected $fillable = [
         'salt',
-        'img'
+        'img',
+        'ip'
     ];
 
     public function user()
