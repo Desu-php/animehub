@@ -48,7 +48,7 @@ class Post extends Model {
             $builder->where('alias', $type);
         })->with(['categories', 'view', 'tv'])
             ->with(['anime' => function($query){
-                $query->orderBy('seria', 'DESC');
+                $query->orderByDesc('seria');
             }]);
     }
 

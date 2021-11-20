@@ -1,29 +1,7 @@
-<?php
-use App\Models\Top;
-use App\Models\Comment;
-use Illuminate\Support\Facades\Cache;
-
-$topPosts = Cache::rememberForever('top', function () {
-    return Top::orderBy('rating', 'DESC')
-        ->with('post.tv')
-        ->take(5)
-        ->get();
-
-});
-
-
-$comments = Cache::rememberForever('comments', function () {
-    return Comment::with(['user.vip', 'post.tv', 'user.role'])
-        ->orderBy('id', 'DESC')
-        ->take(5)
-        ->get();
-});
-?>
-
 <div id="sidebar">
     <div class="update-block">
         <div class="top-weak">
-            <div class="sidebar-head"><a href="/top">Топ аниме</a></div>
+            <div class="sidebar-head"><a href="{{route('top')}}">Топ аниме</a></div>
             <div class="top-weak-img">
                 <a href="/anime">
                     <img src="<?=$topPosts[0]->post->image?>" alt="">

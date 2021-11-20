@@ -15,7 +15,7 @@ class PostController extends Controller
     public function posts(Request $request, $type)
     {
         $posts = Post::post($type)
-            ->orderBy('date', 'desc');
+            ->latest('date');
 
         if ($request->has('year')) {
             $posts->year($request->year);
@@ -33,7 +33,7 @@ class PostController extends Controller
         $posts = Post::post($type)
             ->category($category)
             ->orderBy('date', 'desc')
-            ->paginate();
+            ->paginate(28);
 
         return view('page', compact('posts'));
     }

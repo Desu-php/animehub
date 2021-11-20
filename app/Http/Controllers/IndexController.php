@@ -18,7 +18,7 @@ class IndexController extends Controller
 
         $posts = Cache::rememberForever('posts', function () {
             return Post::post('anime')
-                ->orderBy('date', 'DESC')
+                ->latest('date')
                 ->take(10)
                 ->get();
         });
@@ -26,14 +26,14 @@ class IndexController extends Controller
 
         $newPosts = Cache::rememberForever('newPosts', function () {
             return Post::post('anime')
-                ->orderBy('id', 'DESC')
+                ->latest('id')
                 ->take(5)
                 ->get();
         });
 
         $dorams = Cache::rememberForever('dorams', function () {
             return Post::post('dorams')
-                ->orderBy('id', 'DESC')
+                ->latest('id')
                 ->take(5)
                 ->get();
         });

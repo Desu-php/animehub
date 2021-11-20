@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\IndexController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\TopController;
+use App\Http\Controllers;
+use App\Http\Controllers\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,18 +15,18 @@ use App\Http\Controllers\TopController;
 |
 */
 
-Route::get('/', [IndexController::class, 'index'])->name('home');
+Route::get('/', [Controllers\IndexController::class, 'index'])->name('home');
 
-Route::get('/top', [TopController::class, 'top'])->name('top');
-Route::get('/{type}', [PostController::class, 'posts'])->name('posts');
+Route::get('/top', [Controllers\TopController::class, 'top'])->name('top');
+Route::get('/{type}', [Controllers\PostController::class, 'posts'])->name('posts');
 
 
-Route::get('/{type}/category/{category}', [PostController::class, 'category'])->name('category');
+Route::get('/{type}/category/{category}', [Controllers\PostController::class, 'category'])->name('category');
 
-Route::group(['prefix' => 'auth'], function (){
-    Route::post('login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
-    Route::post('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('login', [Auth\LoginController::class, 'login'])->name('login');
+    Route::post('logout', [Auth\LoginController::class, 'logout'])->name('logout');
 
-    Route::get('registration', [\App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('register');
-    Route::post('registration', [\App\Http\Controllers\Auth\RegisterController::class, 'store'])->name('register.store');
+    Route::get('registration', [Auth\RegisterController::class, 'index'])->name('register');
+    Route::post('registration', [Auth\RegisterController::class, 'store'])->name('register.store');
 });

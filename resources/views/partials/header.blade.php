@@ -1,18 +1,3 @@
-<?php
-
-use App\Models\Year;
-use App\Models\Cat;
-use Illuminate\Support\Facades\Cache;
-
-$years = Cache::rememberForever('years', function () {
-    return Year::orderBy('title')->get();
-});
-
-$categories = Cache::rememberForever('categories', function () {
-    return Cat::all();;
-});
-?>
-
 @if(Auth::check())
     <div id="profile">
         <div class="top">
@@ -30,7 +15,7 @@ $categories = Cache::rememberForever('categories', function () {
                 </div>
 
                 <div class="profile-name"
-{{--                     style="font-family: {{Auth::user()->user->vip->font}}; {{Auth::user()->user->login_color}}"--}}
+                    {{--                     style="font-family: {{Auth::user()->user->vip->font}}; {{Auth::user()->user->login_color}}"--}}
                 >
                     {{Auth::user()->login}}
                 </div>
@@ -46,9 +31,11 @@ $categories = Cache::rememberForever('categories', function () {
                 {{--            <?php endif; ?>--}}
                 <div><a href="/favorites">Закладки: (<span
                             class="bookmark-quantity">{{Auth::user()->user->favorites()->count()}}</span>)</a></div>
-                <div><a href="#" onclick="(event) => event.preventDefault(); document.getElementById('logoutForm').submit()">Выйти</a></div>
+                <div><a href="#"
+                        onclick="(event) => event.preventDefault(); document.getElementById('logoutForm').submit()">Выйти</a>
+                </div>
                 <form hidden id="logoutForm" method="post" action="{{route('logout')}}">
-                        @csrf
+                    @csrf
                 </form>
             </div>
         </div>
@@ -84,7 +71,7 @@ $categories = Cache::rememberForever('categories', function () {
                 <div class="right-part-sub-menu-block">
                     @foreach($categories as $category)
                         <div class="category-item d-flex align-items-center">
-                           <a href="{{route('category', ['anime', $category->slug])}}">{{$category->title}}</a>
+                            <a href="{{route('category', ['anime', $category->slug])}}">{{$category->title}}</a>
                         </div>
 
                     @endforeach
