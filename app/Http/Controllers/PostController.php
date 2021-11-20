@@ -21,7 +21,11 @@ class PostController extends Controller
             $posts->year($request->year);
         }
 
-        $posts = $posts->paginate(28);
+        if ($request->has('type')){
+            $posts->typeAnime($request->type);
+        }
+
+        $posts = $posts->paginate()->withQueryString();
 
         abort_if($posts->isEmpty(), 404);
 
