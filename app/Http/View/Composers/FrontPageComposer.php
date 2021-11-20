@@ -22,9 +22,6 @@ class FrontPageComposer
         $categories = Cache::rememberForever('categories', function () {
             return Cat::all();
         });
-        /*$types = Cache::rememberForever('types', function () {
-            return Type::all();
-        });*/
-        $view->with(['years' => $years, 'categories' => $categories/*, 'types' => $types*/]);
+        $view->with(['years' => $years, 'categories' => $categories]);
     }
 }
