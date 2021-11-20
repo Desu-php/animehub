@@ -1,4 +1,4 @@
-@if(Auth::check())
+@auth
     <div id="profile">
         <div class="top">
             <div>Профиль</div>
@@ -40,7 +40,7 @@
             </div>
         </div>
     </div>
-@endif
+@endauth
 
 <div id="header">
     <a href="{{url('/')}}">
@@ -89,12 +89,13 @@
     </ul>
 
 
-    @if(!Auth::check())
+    @guest
         <div id="sign-in-button">Войти</div>
-    @else
+    @endguest
+    @auth
         <div id="notification"><span class="notification-length"></span><i class="fa fa-bell"></i></div>
         <div id="profile-button">Профиль</div>
-    @endif
+    @endauth
     <div id="menu-button">
         <div class="menu-lines">
             <div class="menu-line l1"></div>
