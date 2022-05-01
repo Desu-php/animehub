@@ -1,11 +1,8 @@
 @extends('partials.layout')
 @section('content')
-
-    @include('templates.slider', compact('sliders'))
-
+    <slider :items="{{json_encode($sliders)}}"></slider>
     <!-- Content -->
     <div id="content">
-
         <!-- поиск -->
         @include('templates.search')
 

@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
-use App\Models\Slider;
-use Illuminate\Http\Request;
+use App\Models\Post\Post;
+use App\Models\Site\Slider;
 use Illuminate\Support\Facades\Cache;
 
 class IndexController extends Controller

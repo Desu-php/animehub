@@ -18,10 +18,18 @@ use App\Http\Controllers\Auth;
 Route::get('/', [Controllers\IndexController::class, 'index'])->name('home');
 
 Route::get('/top', [Controllers\TopController::class, 'top'])->name('top');
-Route::get('/{type}', [Controllers\PostController::class, 'posts'])->name('posts');
+Route::get('type/{type}', [Controllers\PostController::class, 'posts'])->name('posts');
 
 
 Route::get('/{type}/category/{category}', [Controllers\PostController::class, 'category'])->name('category');
+
+Route::group(['prefix' => 'posts'], function () {
+    Route::get('{post}', 'PostController@show')->name('posts.show');
+});
+
+Route::group(['prefix' => 'profile'], function (){
+   Route::get('{login}', fn () => '')->name('profile');
+});
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', [Auth\LoginController::class, 'login'])->name('login');

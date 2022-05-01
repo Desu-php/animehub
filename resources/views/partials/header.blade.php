@@ -30,7 +30,7 @@
                 {{--            <?php endif; ?>--}}
                 {{--            <?php endif; ?>--}}
                 <div><a href="/favorites">Закладки: (<span
-                            class="bookmark-quantity">{{Auth::user()->user->favorites()->count()}}</span>)</a></div>
+                            class="bookmark-quantity">{{Auth::user()->favorites()->count()}}</span>)</a></div>
                 <div><a href="#"
                         onclick="(event) => event.preventDefault(); document.getElementById('logoutForm').submit()">Выйти</a>
                 </div>
@@ -41,7 +41,7 @@
         </div>
     </div>
 @endauth
-
+<login v-model="openLogin"></login>
 <div id="header">
     <a href="{{url('/')}}">
         <div class="logo main-logo"><img alt="logo" draggable="false" class="logo-img"
@@ -90,7 +90,7 @@
 
 
     @guest
-        <div id="sign-in-button">Войти</div>
+        <div id="sign-in-button" @click="showLogin">Войти</div>
     @endguest
     @auth
         <div id="notification"><span class="notification-length"></span><i class="fa fa-bell"></i></div>

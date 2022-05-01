@@ -2,8 +2,8 @@
 
 namespace App\Http\View\Composers;
 
-use App\Models\Comment;
-use App\Models\Top;
+use App\Models\Post\Comment;
+use App\Models\Post\Top;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 

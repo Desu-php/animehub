@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Cat;
+use App\Models\Post\Cat;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 

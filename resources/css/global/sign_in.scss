@@ -66,32 +66,6 @@ body.sign-in-opacity .background {
   transform: translate(-50%, -50%) rotate(-45deg);
 }
 
-#sign-in .main-sign-in-page {
-  margin: 20px;
-  box-sizing: border-box;
-}
-
-#sign-in input.main-input {
-  width: 100%;
-  height: 40px;
-  margin-bottom: 20px;
-  margin-top: 10px;
-  border: none;
-  outline: none;
-  box-sizing: border-box;
-  font-size: 17px;
-}
-
-#sign-in input[type='text'], #sign-in input[type='password'] {
-  position: relative;
-  border-bottom: 1px solid #6882A1;
-  height: 25px;
-  transition: .3s;
-  color: #7F7F7F;
-  background: rgba(255, 255, 255, 0);
-  z-index: 1;
-}
-
 #sign-in input[type=button] {
   color: #fff;
   border-radius: 20px;

@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Post;
-use App\Models\Type;
+use App\Models\Post\Post;
+use App\Models\Post\Type;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -21,6 +21,9 @@ class PostSeeder extends Seeder
         $posts = Post::with('tv')->get();
         $this->types = Type::all();
         foreach ($posts as $post){
+            $post->update([
+                'slug' => Str::slug($post->title.' '.$post->id)
+            ]);
             if (Str::contains(Str::lower($post->tv->title), ['tv', 'тв'])){
                $this->save($post, 'tv');
             }elseif (Str::contains(Str::lower($post->tv->title), ['фильм', 'film'])){

@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const tailwindcss = require('tailwindcss');
 
 /*
  |--------------------------------------------------------------------------
@@ -12,7 +13,11 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+    .js('resources/js/post.js', 'public/js')
+    .vue()
     .css('resources/css/regist.css', 'public/css')
-    .sass('resources/css/app.scss', 'public/css', [
-        //
-    ]);
+    .sass('resources/css/film-page.scss', 'public/css')
+    .sass('resources/css/app.scss', 'public/css', [])
+    .options({
+    postCss: [tailwindcss('./tailwind.config.js')],
+}).version();

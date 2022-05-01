@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Top;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
+use App\Models\Post\Top;
 
 class TopController extends Controller
 {

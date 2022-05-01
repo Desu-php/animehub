@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Cat;
+use App\Models\Post\Cat;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 

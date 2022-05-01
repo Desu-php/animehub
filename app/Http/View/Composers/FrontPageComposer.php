@@ -3,9 +3,8 @@
 namespace App\Http\View\Composers;
 
 
-use App\Models\Cat;
-use App\Models\Type;
-use App\Models\Year;
+use App\Models\Post\Cat;
+use App\Models\Post\Year;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
