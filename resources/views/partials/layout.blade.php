@@ -122,13 +122,13 @@
 
 <!-- Main page -->
     <div id="main">
+        <!-- Main -->
     @yield('content')
-    <!-- Main -->
+
         <!-- Sidebar -->
     @include('partials.sidebar')
-    <!-- Footer -->
-    @include('partials.footer')
     </div>
+    @include('partials.footer')
     <span id="token" style="display:none;">{{csrf_token()}}</span>
     <!-- Yandex.Metrika informer -->
     <a class="metrika" href="https://metrika.yandex.ru/stat/?id=53707954&amp;from=informer"

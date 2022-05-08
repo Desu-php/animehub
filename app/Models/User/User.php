@@ -41,6 +41,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = ['avatar'];
+
+    public function getAvatarAttribute()
+    {
+        return asset($this->user->img);
+    }
+
     public function user()
     {
         return $this->belongsTo(LiteUser::class, 'lite_user_id');

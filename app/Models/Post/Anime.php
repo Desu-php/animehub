@@ -26,6 +26,8 @@ class Anime extends Model
         'post_id',
     ];
 
+    protected $appends = ['full_name'];
+
     public function getFullNameAttribute()
     {
         return $this->kach->title.' '.$this->stud->title.' '.$this->seria.' серия';
@@ -44,5 +46,10 @@ class Anime extends Model
     public function kach()
     {
         return $this->belongsTo(Kach::class, 'id_kach');
+    }
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class, 'post_id');
     }
 }

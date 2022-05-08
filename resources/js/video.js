@@ -3,6 +3,7 @@ var id_post = document.location.pathname.split('/')
 id_post = id_post[id_post.length - 1].split('-')[0]
 let seriesItem = document.querySelectorAll('.series-item');
 let seriesBlock = document.querySelector('.series-block');
+console.log('seriesBlock', seriesBlock)
 let toLeftSeries = document.querySelector('.to-left-series');
 let toRightSeries = document.querySelector('.to-right-series');
 let topVideoBlock = document.querySelector('.top-video-block');
@@ -81,55 +82,6 @@ videoLink.addEventListener('timeupdate', function () {
         video: videoLink.currentTime
     }))
 })
-favorite.classList.contains('choose') ? favoriteText.innerHTML = 'Удалить из избранного' : favoriteText.innerHTML = 'Добавить в избранное';
-
-favorite.onclick = () => {
-    if (!favorite.classList.contains('choose')) {
-        $.ajax({
-            type: "post",
-            url: "/ajax/favorites/add",
-            data: ({"id_post": id_post, "token": $("#token").text()}),
-            dataType: "text",
-            success: function (response) {
-                response = JSON.parse(response);
-                switch (response.status) {
-                    case "401":
-                        showMessage("Ошибка", "авторизуйтесь прежде чем добавлять в закладки", error)
-                        break;
-                    case "200":
-                        favorite.classList.toggle('choose');
-                        favorite.classList.contains('choose') ? favoriteText.innerHTML = 'Удалить из избранного' : favoriteText.innerHTML = 'Добавить в избранное';
-                        break;
-                    default:
-                        showMessage("Ошибка", "что то пошло не так", error)
-                        break;
-                }
-            }
-        })
-    } else {
-        $.ajax({
-            type: "post",
-            url: "/ajax/favorites/delete",
-            data: ({"id_post": id_post, "token": $("#token").text()}),
-            dataType: "text",
-            success: function (response) {
-                response = JSON.parse(response);
-                switch (response.status) {
-                    case "401":
-                        showMessage("Ошибка", "авторизуйтесь прежде чем добавлять в закладки", error)
-                        break;
-                    case "200":
-                        favorite.classList.toggle('choose');
-                        favorite.classList.contains('choose') ? favoriteText.innerHTML = 'Удалить из избранного' : favoriteText.innerHTML = 'Добавить в избранное';
-                        break;
-                    default:
-                        showMessage("Ошибка", "что то пошло не так", error);
-                        break;
-                }
-            }
-        })
-    }
-};
 
 toRightSeries.addEventListener('click', () => scrollingSeries(-(seriesItem[0].offsetWidth + 10)));
 toLeftSeries.addEventListener('click', () => scrollingSeries(seriesItem[0].offsetWidth + 10));

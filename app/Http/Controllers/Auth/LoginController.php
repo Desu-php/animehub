@@ -14,17 +14,19 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request)
     {
-        if (!Auth::attempt($request->only('password', 'login'), $request->remember)){
+        if (!Auth::attempt($request->only('password', 'login'), $request->remember)) {
 
             $liteUser = LiteUser::where('login', $request->login)
                 ->where('password', md5($request->password))
                 ->first();
 
-            if (is_null($liteUser)){
-                return back()->withErrors(['errors', 'Неверный логин или пароль']);
+            if (is_null($liteUser)) {
+                return response()->json([
+                    'message' => 'Неверный логин или пароль'
+                ], 400);
             }
 
-           $liteUser->user()->create([
+             $liteUser->user()->create([
                 'login' => $liteUser->login,
                 'email' => $liteUser->email,
                 'password' => Hash::make($request->password)
@@ -34,7 +36,7 @@ class LoginController extends Controller
         }
 
 
-        return  redirect()->intended();
+        return response()->json(Auth::user());
     }
 
     public function logout()

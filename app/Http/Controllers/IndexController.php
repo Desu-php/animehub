@@ -40,4 +40,12 @@ class IndexController extends Controller
         return view('index', compact('sliders', 'posts', 'newPosts', 'dorams'));
     }
 
+    public function getTests()
+    {
+        sleep(2);
+       return response()->json([
+            'message' => 'Hello World !'
+        ]);
+    }
+
 }

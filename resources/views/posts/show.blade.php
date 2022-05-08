@@ -61,51 +61,12 @@
             <div class="show-all-text">Развернуть</div>
         </div>
 
-        <div class="top-video-block">
-            <div class="show-all-series-post">Показать все серии</div>
-            <div class="search-series-input">
-                <input id="search-input" type="text" placeholder="">
-                <div class="search-placeholder">Поиск серии</div>
-            </div>
-
-            <div class="arrow-series to-left-series">
-                <div></div>
-            </div>
-
-            <div class="series-block">
-                <div class="series-main-list">
-                    <div class="search-place-post">
-                        <i class="fa fa-reply-all"></i>
-                        <input class="post-search" type="text">
-                        <div class="placeholder-post">Поиск серии</div>
-                    </div>
-                    <ul class="series-list">
-                        @foreach($post->series as $item)
-                            <li class="series-item"
-                                data-src="{{$item->src}}"
-                                data-id="{{$item->id}}"
-                                data-stud="{{$item->stud->title}}"
-                                id="{{$item->id}}">{{$item->full_name}}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-
-            <div class="arrow-series to-right-series">
-                <div></div>
-            </div>
-            <div class="search-series">
-                <i class="fa fa-search"></i>
-            </div>
-        </div>
-
-
-        <video class="video" autoplay controls></video>
-
-        {{--        <div class="like">--}}
-        {{--            <i class="far fa-thumbs-up" id="like" aria-hidden="true"> <span><?=$rating['like']?></span></i>--}}
-        {{--            <i class="far fa-thumbs-down" id="dislike" aria-hidden="true"> <span><?=$rating['disLike']?></span></i>--}}
-        {{--        </div>--}}
+        <player
+            :kachs="{{json_encode($kachs)}}"
+            :studs="{{json_encode($studs)}}"
+            :series="{{json_encode($post->series)}}"
+        >
+        </player>
 
         @if($similarPosts->isNotEmpty())
             <div class="all-anime-block">

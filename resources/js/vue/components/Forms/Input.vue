@@ -16,7 +16,7 @@
             />
             <label for="username" class="absolute top-0 -z-1 duration-300 origin-0">{{ label }}</label>
         </div>
-        <small class="text-red-800">{{ error }}</small>
+        <small class="text-red-800">{{ Array.isArray(error) ? error[0] : error }}</small>
     </div>
 
 
@@ -35,7 +35,7 @@ export default {
             default: ''
         },
         error: {
-            type: String,
+            type: [String, Array, Object],
             default: ''
         }
     }

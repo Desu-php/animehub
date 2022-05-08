@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post\GodWip;
+use App\Models\Post\Kach;
 use App\Models\Post\Post;
+use App\Models\Post\Stud;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -39,7 +41,7 @@ class PostController extends Controller
             'users' => fn($q) => $q->where('users.id', auth()->id()),
         ])->load([
             'comments' => fn($q) => $q->with(['user.vip', 'user.user']),
-            'series' => fn($q) => $q->with(['stud', 'kach']),
+            'series' => fn($q) => $q->with(['stud', 'kach'])->orderBy('seria'),
         ]);
 
         $viewingOrder = GodWip::orderBy('title')
@@ -54,7 +56,11 @@ class PostController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
-        return view('posts.show', compact('post', 'viewingOrder', 'similarPosts'));
+        $kachs = Kach::post($post->id)->get();
+
+        $studs = Stud::post($post->id)->get();
+
+        return view('posts.show', compact('post', 'viewingOrder', 'similarPosts', 'kachs', 'studs'));
     }
 
     public function category($type, $category)

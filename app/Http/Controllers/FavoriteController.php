@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class FavoriteController extends Controller
@@ -36,5 +37,10 @@ class FavoriteController extends Controller
         return response()->json([
             'action' => $action
         ]);
+    }
+
+    public function getFavoritesCount()
+    {
+        return response()->json(\auth()->user()->favorites()->count());
     }
 }

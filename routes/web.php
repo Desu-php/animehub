@@ -15,7 +15,9 @@ use App\Http\Controllers\Auth;
 |
 */
 
+Route::get('/getTests', 'IndexController@getTests');
 Route::get('/', [Controllers\IndexController::class, 'index'])->name('home');
+
 
 Route::get('/top', [Controllers\TopController::class, 'top'])->name('top');
 Route::get('type/{type}', [Controllers\PostController::class, 'posts'])->name('posts');
@@ -27,8 +29,14 @@ Route::group(['prefix' => 'posts'], function () {
     Route::get('{post}', 'PostController@show')->name('posts.show');
 });
 
-Route::group(['prefix' => 'profile'], function (){
-   Route::get('{login}', fn () => '')->name('profile');
+Route::group(['prefix' => 'profile'], function () {
+    Route::get('{login}', fn() => '')->name('profile');
+});
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::group(['prefix' => 'favorites'], function () {
+        Route::get('count','FavoriteController@getFavoritesCount')->name('favorites.count');
+    });
 });
 
 Route::group(['prefix' => 'auth'], function () {
